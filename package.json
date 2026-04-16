@@ -1,0 +1,8 @@
+{
+  "name": "void-bot",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "puppeteer": "^24.40.0"
+  }
+}
