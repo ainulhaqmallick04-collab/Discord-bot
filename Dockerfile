@@ -1,0 +1,16 @@
+FROM node:24-slim
+RUN apt-get update && apt-get install -y \
+    chromium fonts-liberation libatk-bridge2.0-0 libatk1.0-0 \
+    libcups2 libdrm2 libgbm1 libnss3 libxcomposite1 \
+    libxdamage1 libxrandr2 libxss1 \
+    --no-install-recommends && rm -rf /var/lib/apt/lists/*
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV CHROMIUM_PATH=/usr/bin/chromium
+ENV NODE_ENV=production
+ENV PORT=8080
+WORKDIR /app
+COPY package.json ./
+RUN npm install --omit=dev
+COPY dist/ ./dist/
+EXPOSE 8080
+CMD ["node","dist/index.mjs"]
